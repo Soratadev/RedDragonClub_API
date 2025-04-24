@@ -1,0 +1,24 @@
+services:
+  apache-php:
+    build: './.docker/apache-php'
+    container_name: "reddragon_apache_php"
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html/RedDragonClub
+    depends_on:
+      - db
+
+  db:
+    build: './.docker/postgres'
+    container_name: "reddragon_db"
+    environment:
+      POSTGRES_DB: reddragonclub_db
+      POSTGRES_ROOT: postgres
+      POSTGRES_ROOT_PASSWORD: root1234+
+      POSTGRES_USER: reddragon
+      POSTGRES_PASSWORD: reddragon1234+
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.docker/postgres/data:/var/lib/postgresql/data
