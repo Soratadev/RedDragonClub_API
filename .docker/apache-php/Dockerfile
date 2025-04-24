@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
         sockets \
         uuid \
         zip \
-        xdebug \
+        xdebug
 
 # Instalar Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
