@@ -42,7 +42,7 @@ class Boardgame
     /**
      * @var Collection<int, Category>
      */
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'boardgames')]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'boardgames')]
     private Collection $categories;
 
     /**

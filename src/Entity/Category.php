@@ -25,7 +25,7 @@ class Category
     /**
      * @var Collection<int, Boardgame>
      */
-    #[ORM\ManyToMany(targetEntity: Boardgame::class, inversedBy: 'categories')]
+    #[ORM\ManyToMany(targetEntity: Boardgame::class, mappedBy: 'categories')]
     private Collection $boardgames;
 
     public function __construct()
