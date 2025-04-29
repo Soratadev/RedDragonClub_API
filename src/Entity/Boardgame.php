@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BoardgameRepository::class)]
 class Boardgame
@@ -16,11 +17,12 @@ class Boardgame
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $title = null;
+    #[ORM\Column(length: 50, unique: true)]
+    #[Assert\NotBlank]
+    private string $title;
 
     #[ORM\Column(length: 255)]
-    private ?string $designer = null;
+    private string $designer;
 
     #[ORM\Column(length: 5, nullable: true)]
     private ?string $players = null;
