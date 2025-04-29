@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Boardgame;
 use App\Form\Type\BoardgameFormType;
 use App\Repository\BoardgameRepository;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,7 +20,6 @@ final class CreateBoardgameController extends AbstractController
     public function __construct(
         private readonly BoardgameRepository $boardgameRepository,
         private readonly CategoryRepository  $categoryRepository,
-        private readonly ValidatorInterface  $validator,
     ){}
 
     #[Route('/boardgame/create', name: 'app_create_boardgame', methods: ['POST'])]
@@ -43,6 +43,25 @@ final class CreateBoardgameController extends AbstractController
             $this->boardgameRepository->saveBoardgame($boardgame);
             return new JsonResponse(['message' => 'Board game created successfully'], Response::HTTP_CREATED);
         }
-        return new JsonResponse(['message' => 'Board game not created.'], Response::HTTP_BAD_REQUEST);
+        return new JsonResponse([
+            'status' => 'error',
+            'errors' => $this->getFormErrors($form),
+        ], 422);
+        //return new JsonResponse(['message' => 'Board game not created.'], Response::HTTP_BAD_REQUEST);
+    }
+
+    private function getFormErrors(FormInterface $form): array
+    {
+        $errors = [];
+
+        foreach ($form->all() as $child) {
+            if (!$child->isValid()) {
+                foreach ($child->getErrors(true) as $error) {
+                    $errors[$child->getName()][] = $error->getMessage();
+                }
+            }
+        }
+        return $errors;
     }
 }
+
