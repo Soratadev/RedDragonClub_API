@@ -17,10 +17,10 @@ final class GetBoardgameController extends AbstractController
     #[Route('/boardgame/{id}', name: 'app_find_boardgame', methods: ['GET'])]
     public function getBoardgame(int $id): JsonResponse
     {
-
+        $result = new JsonResponse();
         $boardgame = $this->boardgameRepository->find($id);
         if (!$boardgame) {
-            return new JsonResponse(['message' => 'Board game not found.'], Response::HTTP_NOT_FOUND);
+            $result = new JsonResponse(['message' => 'Board game not found.'], Response::HTTP_NOT_FOUND);
         }
 
         $categories = array_map(function ($category) {

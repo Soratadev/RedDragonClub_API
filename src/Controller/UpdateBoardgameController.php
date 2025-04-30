@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Form\Type\BoardgameFormType;
 use App\Repository\BoardgameRepository;
-use App\Repository\CategoryRepository;
+use App\Services\AddCategoriesService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,17 +15,15 @@ final class UpdateBoardgameController extends AbstractController
 {
     public function __construct(
         private readonly BoardgameRepository $boardgameRepository,
-        private readonly CategoryRepository  $categoryRepository,
+        private readonly AddCategoriesService $addCategoriesService,
     ){}
-
-
-
     #[Route('/boardgame/edit/{id}', name: 'app_update_boardgame', methods: ['PUT'])]
     public function updateBoardgame(Request $request, int $id): JsonResponse
     {
+        $result = new JsonResponse();
         $boardgame = $this->boardgameRepository->find($id);
         if (!$boardgame) {
-            return new JsonResponse(['message' => 'Board game not found.'], Response::HTTP_NOT_FOUND);
+            $result = new JsonResponse(['message' => 'Board game not found.'], Response::HTTP_NOT_FOUND);
         }
         $data = json_decode($request->getContent(), true);
         $form = $this->createForm(BoardgameFormType::class, $boardgame);
@@ -36,19 +34,14 @@ final class UpdateBoardgameController extends AbstractController
             foreach ($boardgame->getCategories() as $category) {
                 $boardgame->removeCategory($category);
             }
-            // add new categories from the form
-            if (isset($data['category']) && is_array($data['category'])) {
-                foreach ($data['category'] as $categoryId) {
-                    $category = $this->categoryRepository->find($categoryId);
-                    if ($category) {
-                        $boardgame->addCategory($category);
-                    }
-                }
-            }
-            $this->boardgameRepository->saveBoardgame($boardgame);
-            return new JsonResponse(['message' => 'Board game updated successfully'], Response::HTTP_OK);
-        }
+            $this->addCategoriesService->addCategories($boardgame, $data);
 
-        return new JsonResponse(['error' => 'Please enter valid data for a board game'], Response::HTTP_BAD_REQUEST);
+            $this->boardgameRepository->saveBoardgame($boardgame);
+
+            $result = new JsonResponse(['message' => 'Board game updated successfully'], Response::HTTP_OK);
+        } else {
+            $result = new JsonResponse(['error' => 'Please enter valid data for a board game'], Response::HTTP_BAD_REQUEST);
+        }
+        return $result;
     }
 }

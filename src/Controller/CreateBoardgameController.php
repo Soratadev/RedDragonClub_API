@@ -4,10 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Boardgame;
 use App\Form\Type\BoardgameFormType;
-use App\Repository\BoardgameRepository;
 use App\Services\CreateBoardgameService;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,12 +20,9 @@ final class CreateBoardgameController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $boardgame = new Boardgame();
-
         $form = $this->createForm(BoardgameFormType::class, $boardgame);
         $form->submit($data);
         return $this->createBoardgameService->createBoardgame($data, $boardgame, $form);
     }
-
-
 }
 
