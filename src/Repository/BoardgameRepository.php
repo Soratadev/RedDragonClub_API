@@ -20,6 +20,11 @@ class BoardgameRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($boardgame);
         $this->getEntityManager()->flush();
     }
+    public function removeBoardgame(Boardgame $boardgame): void
+    {
+        $this->getEntityManager()->remove($boardgame);
+        $this->getEntityManager()->flush();
+    }
 
     //    /**
     //     * @return Boardgame[] Returns an array of Boardgame objects
