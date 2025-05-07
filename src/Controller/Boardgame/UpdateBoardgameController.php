@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Boardgame;
 
 use App\Form\Type\BoardgameFormType;
 use App\Repository\BoardgameRepository;

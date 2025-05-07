@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Boardgame;
 
 use App\Repository\BoardgameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,7 @@ final class GetAllBoardgameController extends AbstractController
     )
     {}
 
-    #[Route('/boardgames', name: 'app_read_boardgames', methods: ['GET'])]
+    #[Route('/boardgame', name: 'app_read_boardgames', methods: ['GET'])]
     public function findAllBoardgames(): JsonResponse
     {
         $result = new JsonResponse();
@@ -33,7 +33,7 @@ final class GetAllBoardgameController extends AbstractController
 
                 return [
                     'id' => $boardgame->getId(),
-                    'title' => $boardgame->getTitle(),
+                    'name' => $boardgame->getName(),
                     'designer' => $boardgame->getDesigner(),
                     'players' => $boardgame->getPlayers(),
                     'playingTime' => $boardgame->getPlayingTime(),

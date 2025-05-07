@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Boardgame;
 
 use App\Repository\BoardgameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

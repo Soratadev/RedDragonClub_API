@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Boardgame;
 
 use App\Repository\BoardgameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +32,7 @@ final class GetBoardgameController extends AbstractController
 
         $boardgameData = [
             'id' => $boardgame->getId(),
-            'title' => $boardgame->getTitle(),
+            'name' => $boardgame->getName(),
             'designer' => $boardgame->getDesigner(),
             'players' => $boardgame->getPlayers(),
             'playingTime' => $boardgame->getPlayingTime(),

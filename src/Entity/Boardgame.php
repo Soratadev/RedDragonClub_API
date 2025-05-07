@@ -19,7 +19,7 @@ class Boardgame
 
     #[ORM\Column(length: 50, unique: true)]
     #[Assert\NotBlank]
-    private string $title;
+    private string $name;
 
     #[ORM\Column(length: 255)]
     private string $designer;
@@ -65,14 +65,14 @@ class Boardgame
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(string $title): static
+    public function setName(string $name): static
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }

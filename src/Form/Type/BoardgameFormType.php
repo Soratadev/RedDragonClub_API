@@ -19,7 +19,7 @@ class BoardgameFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, ['required' => true])
+            ->add('name', TextType::class, ['required' => true])
             ->add('designer', TextType::class, ['required' => true])
             ->add('players', TextType::class)
             ->add('playingTime', TextType::class)
