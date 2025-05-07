@@ -27,7 +27,7 @@ final class UpdateBoardgameController extends AbstractController
         }
         $data = json_decode($request->getContent(), true);
         $form = $this->createForm(BoardgameFormType::class, $boardgame);
-        $form->submit($data);
+        $form->submit($data, false);
 
         if ($form->isValid()) {
             // clear existing categories

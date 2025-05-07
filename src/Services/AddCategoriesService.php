@@ -16,10 +16,13 @@ class AddCategoriesService extends GetErrorService
     public function addCategories(Boardgame &$boardgame, $data): void
     {
         if (isset($data['categories']) && is_array($data['categories'])) {
-            foreach ($data['categories'] as $categoryId) {
-                $category = $this->categoryRepository->find($categoryId);
-                if ($category) {
-                    $boardgame->addCategory($category);
+            foreach ($data['categories'] as $categoryData) {
+                if (isset($categoryData['id'])) {
+                    $category = $this->categoryRepository->find($categoryData['id']);
+                    if ($category) {
+                        $boardgame->addCategory($category);
+                    }
+
                 }
             }
         }
