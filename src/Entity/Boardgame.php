@@ -27,7 +27,7 @@ class Boardgame
     #[ORM\Column(length: 5, nullable: true)]
     private ?string $players = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(length: 15, nullable: true)]
     private ?string $playingTime = null;
 
     #[ORM\Column]

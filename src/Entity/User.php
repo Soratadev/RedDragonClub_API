@@ -38,6 +38,9 @@ class User
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'idUser')]
     private Collection $bookings;
 
+    #[ORM\Column]
+    private bool $isAdmin;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -134,6 +137,18 @@ class User
                 $booking->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isAdmin(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin(bool $isAdmin): static
+    {
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }
