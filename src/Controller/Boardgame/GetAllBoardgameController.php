@@ -15,7 +15,7 @@ final class GetAllBoardgameController extends AbstractController
     )
     {}
 
-    #[Route('/boardgame', name: 'app_read_boardgames', methods: ['GET'])]
+    #[Route('/public/catalog', name: 'app_boardgames', methods: ['GET'])]
     public function findAllBoardgames(): JsonResponse
     {
         $result = new JsonResponse();
