@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class EditBookingController extends AbstractController
 {
-    #[Route('/edit/booking', name: 'app_edit_booking')]
+    #[Route('/booking/edit/{id}', name: 'app_edit_booking')]
     public function index(): JsonResponse
     {
         return $this->json([
