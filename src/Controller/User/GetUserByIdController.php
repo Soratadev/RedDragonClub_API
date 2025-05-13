@@ -25,7 +25,7 @@ final class GetUserByIdController extends AbstractController
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'email' => $user->getEmail(),
-            'dateOfBirth' => $user->getDateOfBirth(),
+            'birthdate' => $user->getBirthdate(),
             'dateOfJoining' => $user->getDateOfJoining(),
             'roles' => $user->getRoles()
         ];

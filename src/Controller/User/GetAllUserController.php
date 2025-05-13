@@ -26,8 +26,9 @@ final class GetAllUserController extends AbstractController
                     'id' => $user->getId(),
                     'username' => $user->getUsername(),
                     'email' => $user->getEmail(),
-                    'dateOfBirth' => $user->getDateOfBirth(),
-                    'dateOfJoining' => $user->getDateOfJoining(),
+                    'birthdate' => date_format($user->getBirthdate(), 'Y-m-d'),
+                    'dateOfJoining' => date_format($user->getDateOfJoining(), 'Y-m-d'),
+                    'isAdmin' => $user->isAdmin(),
                     'roles' => $user->getRoles()
                 ];
             }, $users);

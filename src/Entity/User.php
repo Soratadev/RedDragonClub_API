@@ -16,22 +16,22 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 50)]
-    private ?string $username = null;
+    private string $username;
 
     #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    private string $email;
 
     #[ORM\Column(length: 255)]
-    private ?string $password = null;
+    private string $password;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $dateOfJoining = null;
+    private ?\DateTime $dateOfJoining = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $birthdate = null;
+    private ?\DateTime $birthdate = null;
 
     /**
      * @var Collection<int, Booking>
@@ -88,24 +88,24 @@ class User implements UserInterface, \Symfony\Component\Security\Core\User\Passw
         return $this;
     }
 
-    public function getDateOfJoining(): ?\DateTimeInterface
+    public function getDateOfJoining(): ?\DateTime
     {
         return $this->dateOfJoining;
     }
 
-    public function setDateOfJoining(\DateTimeInterface $dateOfJoining): static
+    public function setDateOfJoining(\DateTime $dateOfJoining): static
     {
         $this->dateOfJoining = $dateOfJoining;
 
         return $this;
     }
 
-    public function getBirthdate(): ?\DateTimeInterface
+    public function getBirthdate(): ?\DateTime
     {
         return $this->birthdate;
     }
 
-    public function setBirthdate(\DateTimeInterface $birthdate): static
+    public function setBirthdate(\DateTime $birthdate): static
     {
         $this->birthdate = $birthdate;
 

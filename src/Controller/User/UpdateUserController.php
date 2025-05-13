@@ -25,7 +25,10 @@ final class UpdateUserController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $user->setUsername($data['username']);
         $user->setEmail($data['email']);
-        $user->setDateOfBirth($data['dateOfBirth']);
+        if ($data['birthdate'] !== null && $data['birthdate'] !== ['birthdate' => '']) {
+            $user->setBirthdate(new \DateTime($data['birthdate']));
+        }
+
 
         $this->userRepository->saveUser($user);
         $result = new JsonResponse(['message' => 'User updated successfully'], Response::HTTP_OK);
