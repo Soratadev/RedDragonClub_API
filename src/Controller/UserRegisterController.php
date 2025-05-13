@@ -29,7 +29,7 @@ class UserRegisterController extends AbstractController
 
         $user = new User();
         $user->setEmail($data['email']);
-        $user->setName($data['name'] ?? '');
+        $user->setUsername($data['username'] ?? '');
         $user->setDateOfJoining(new \DateTime());
         $user->setBirthdate(new \DateTime($data['birthdate'] ?? '01-01-2000'));
         $user->setIsAdmin(false);

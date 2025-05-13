@@ -16,7 +16,7 @@ class LoginSuccessHandler
 
         if ($user) {
             // Agregar el nombre del usuario y su rol
-            $data['name'] = $user->getName();
+            $data['username'] = $user->getUsername();
             $data['role'] = $user->getRoles();
 
         }
